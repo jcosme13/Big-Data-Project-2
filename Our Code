@@ -3,11 +3,13 @@ install.packages('ggplot2')
 install.packages('GGally')
 install.packages("rgl")
 install.packages("psych")
+install.packages("igraph")
 library("readxl")
 library("ggplot2")
 library("GGally")
 library("rgl")
 library("psych")
+library("igraph")
 my_data <- read_excel("Dry_Bean_Dataset.xlsx")
 plot(my_data)
 h <- my_data[,1:8]
@@ -51,3 +53,50 @@ h1.norm.train[1:20,]
 
 h1.norm.test<-h1.norm[-h1.norm.train.index,]
 h1.norm.test[1:20,]
+
+# Kmeans Clustering for k = 5 to 10
+h1.k5<-kmeans(h1.norm, centers=5, nstart=10)
+h1.k5
+factoextra::fviz_cluster(h1.k5,h1)
+
+h1.k6<-kmeans(h1.norm, centers=6, nstart=10)
+h1.k6
+factoextra::fviz_cluster(h1.k6,h1)
+
+h1.k7<-kmeans(h1.norm, centers=7, nstart=10)
+h1.k7
+factoextra::fviz_cluster(h1.k7,h1)
+
+h1.k8<-kmeans(h1.norm, centers=8, nstart=10)
+h1.k8
+factoextra::fviz_cluster(h1.k8,h1)
+
+h1.k9<-kmeans(h1.norm, centers=9, nstart=10)
+h1.k9
+factoextra::fviz_cluster(h1.k9,h1)
+
+h1.k10<-kmeans(h1.norm, centers=10, nstart=10)
+h1.k10
+factoextra::fviz_cluster(h1.k10,h1)
+
+# create test labels via kmeans
+h1.norm.test.k5<-kmeans(h1.norm.test, centers=5)
+h1.norm.test.k5
+
+h1.norm.test.k6<-kmeans(h1.norm.test, centers=6)
+h1.norm.test.k6
+
+h1.norm.test.k7<-kmeans(h1.norm.test, centers=7)
+h1.norm.test.k7
+
+h1.norm.test.k8<-kmeans(h1.norm.test, centers=8)
+h1.norm.test.k8
+
+h1.norm.test.k9<-kmeans(h1.norm.test, centers=9)
+h1.norm.test.k9
+
+h1.norm.test.k10<-kmeans(h1.norm.test, centers=10)
+h1.norm.test.k10
+
+# knn clustering for k = 5 to 10
+h1.knn5 <- class::knn(h1.norm.train, h1.norm.test, k=5)

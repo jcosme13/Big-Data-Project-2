@@ -10,6 +10,44 @@ library("rgl")
 library("psych")
 my_data <- read_excel("Dry_Bean_Dataset.xlsx")
 plot(my_data)
-rglplot(bean_graph)
+h <- my_data[,1:8]
+plot(h)
+# rglplot(bean_graph)
 summary(my_data)
 describe(my_data)
+
+# remove extent, solidity, shape factor 3, shape factor 4, roundness, class, 
+# aspect ration
+h1 <-my_data[c(1,2,3,4,7,8,13,14)]
+
+# normalize
+normalize <- function(x) {((x-min(x)) / (max(x)-min(x)))}
+h1.norm <- as.data.frame(lapply(h1, normalize))
+
+# training and test sets for 70%
+h1.norm.nrows<-nrow(h1.norm)
+h1.norm.sample<-0.7
+h1.norm.train.index<-sample(h1.norm.nrows, h1.norm.sample*h1.norm.nrows)
+h1.norm.train<-h1.norm[h1.norm.train.index,]
+h1.norm.train[1:20,]
+
+h1.norm.test<-h1.norm[-h1.norm.train.index,]
+h1.norm.test[1:20,]
+
+# training and test sets for 60%
+h1.norm.sample<-0.6
+h1.norm.train.index<-sample(h1.norm.nrows, h1.norm.sample*h1.norm.nrows)
+h1.norm.train<-h1.norm[h1.norm.train.index,]
+h1.norm.train[1:20,]
+
+h1.norm.test<-h1.norm[-h1.norm.train.index,]
+h1.norm.test[1:20,]
+
+# training and test sets for 50%
+h1.norm.sample<-0.5
+h1.norm.train.index<-sample(h1.norm.nrows, h1.norm.sample*h1.norm.nrows)
+h1.norm.train<-h1.norm[h1.norm.train.index,]
+h1.norm.train[1:20,]
+
+h1.norm.test<-h1.norm[-h1.norm.train.index,]
+h1.norm.test[1:20,]

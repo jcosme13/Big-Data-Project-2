@@ -4,12 +4,16 @@ install.packages('GGally')
 install.packages("rgl")
 install.packages("psych")
 install.packages("igraph")
+install.packages("stats")
+install.packages("gmodels")
 library("readxl")
 library("ggplot2")
 library("GGally")
 library("rgl")
 library("psych")
 library("igraph")
+library("stats")
+library("gmodels")
 my_data <- read_excel("Dry_Bean_Dataset.xlsx")
 plot(my_data)
 h <- my_data[,1:8]
@@ -79,7 +83,26 @@ h1.k10<-kmeans(h1.norm, centers=10, nstart=10)
 h1.k10
 factoextra::fviz_cluster(h1.k10,h1)
 
-# create test labels via kmeans
+# create training labels for kmeans
+h1.norm.train.k5<-kmeans(h1.norm.train, centers=5)
+h1.norm.train.k5
+
+h1.norm.train.k6<-kmeans(h1.norm.train, centers=6)
+h1.norm.train.k6
+
+h1.norm.train.k7<-kmeans(h1.norm.train, centers=7)
+h1.norm.train.k7
+
+h1.norm.train.k8<-kmeans(h1.norm.train, centers=8)
+h1.norm.train.k8
+
+h1.norm.train.k9<-kmeans(h1.norm.train, centers=9)
+h1.norm.train.k9
+
+h1.norm.train.k10<-kmeans(h1.norm.train, centers=10)
+h1.norm.train.k10
+
+# create test labels for kmeans
 h1.norm.test.k5<-kmeans(h1.norm.test, centers=5)
 h1.norm.test.k5
 
@@ -98,5 +121,26 @@ h1.norm.test.k9
 h1.norm.test.k10<-kmeans(h1.norm.test, centers=10)
 h1.norm.test.k10
 
+h1.norm.test.labels<-h1.norm.test.k5$cluster
+
 # knn clustering for k = 5 to 10
-h1.knn5 <- class::knn(h1.norm.train, h1.norm.test, k=5)
+h1.knn5 <- class::knn(h1.norm.train, h1.norm.test, k=5, prob=FALSE)
+
+
+# iclust???
+h1.clust.k5 <- iclust(h1, nclusters = 5)
+h1.clust.k6 <- iclust(h1, nclusters = 6)
+h1.clust.k7 <- iclust(h1, nclusters = 7)
+h1.clust.k8 <- iclust(h1, nclusters = 8)
+h1.clust.k9 <- iclust(h1, nclusters = 9)
+h1.clust.k10 <- iclust(h1, nclusters = 10)
+
+# predictions???
+h1.norm.test.lm<-lm(formula=h1.norm.test$Area~h1.norm.test$Perimeter+h1.norm.test$MajorAxisLength+h1.norm.test$MinorAxisLength+h1.norm.test$ConvexArea+h1.norm.test$EquivDiameter+h1.norm.test$ShapeFactor1+h1.norm.test$ShapeFactor2, data=h1.norm.test)
+h1.norm.pred<-predict(h1.norm.test.lm, newData=h1.norm.test)
+
+h1.norm.test.glm<-glm(formula=h1.norm.test$Area~h1.norm.test$Perimeter+h1.norm.test$MajorAxisLength+h1.norm.test$MinorAxisLength+h1.norm.test$ConvexArea+h1.norm.test$EquivDiameter+h1.norm.test$ShapeFactor1+h1.norm.test$ShapeFactor2, data=h1.norm.test)
+h1.norm.test.glm
+
+h1.norm.ct<-CrossTable(h1.norm.test.labels, h1.norm.pred, prop.chisq = FALSE)
+

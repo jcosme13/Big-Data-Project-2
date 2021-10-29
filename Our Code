@@ -25,6 +25,7 @@ describe(my_data)
 # remove extent, solidity, shape factor 3, shape factor 4, roundness, class, 
 # aspect ration
 h1 <-my_data[c(1,2,3,4,7,8,13,14)]
+plot(h1)
 
 # normalize
 normalize <- function(x) {((x-min(x)) / (max(x)-min(x)))}
@@ -124,16 +125,38 @@ h1.norm.test.k10
 h1.norm.test.labels<-h1.norm.test.k5$cluster
 
 # knn clustering for k = 5 to 10
-h1.knn5 <- class::knn(h1.norm.train, h1.norm.test, k=5, prob=FALSE)
+h1.norm.test.knn5 <- class::knn(h1.norm.train, h1.norm.test, h1.norm.train.k5$cluster,k=5)
+h1.norm.test.knn5
+
+h1.norm.test.knn6 <- class::knn(h1.norm.train, h1.norm.test, h1.norm.train.65$cluster,k=6)
+h1.norm.test.knn6
+
+h1.norm.test.knn7 <- class::knn(h1.norm.train, h1.norm.test, h1.norm.train.k7$cluster,k=7)
+h1.norm.test.knn7
+
+h1.norm.test.knn8 <- class::knn(h1.norm.train, h1.norm.test, h1.norm.train.k8$cluster,k=8)
+h1.norm.test.knn8
+
+h1.norm.test.knn9 <- class::knn(h1.norm.train, h1.norm.test, h1.norm.train.k9$cluster,k=9)
+h1.norm.test.knn9
+
+h1.norm.test.knn10 <- class::knn(h1.norm.train, h1.norm.test, h1.norm.train.k10$cluster,k=10)
+h1.norm.test.knn10
 
 
-# iclust???
+# iclust
 h1.clust.k5 <- iclust(h1, nclusters = 5)
+h1.clust.k5
 h1.clust.k6 <- iclust(h1, nclusters = 6)
+h1.clust.k6
 h1.clust.k7 <- iclust(h1, nclusters = 7)
+h1.clust.k7
 h1.clust.k8 <- iclust(h1, nclusters = 8)
+h1.clust.k8
 h1.clust.k9 <- iclust(h1, nclusters = 9)
+h1.clust.k9
 h1.clust.k10 <- iclust(h1, nclusters = 10)
+h1.clust.k10
 
 # predictions???
 h1.norm.test.lm<-lm(formula=h1.norm.test$Area~h1.norm.test$Perimeter+h1.norm.test$MajorAxisLength+h1.norm.test$MinorAxisLength+h1.norm.test$ConvexArea+h1.norm.test$EquivDiameter+h1.norm.test$ShapeFactor1+h1.norm.test$ShapeFactor2, data=h1.norm.test)

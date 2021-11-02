@@ -33,130 +33,292 @@ h1.norm <- as.data.frame(lapply(h1, normalize))
 
 # training and test sets for 70%
 h1.norm.nrows<-nrow(h1.norm)
-h1.norm.sample<-0.7
-h1.norm.train.index<-sample(h1.norm.nrows, h1.norm.sample*h1.norm.nrows)
-h1.norm.train<-h1.norm[h1.norm.train.index,]
-h1.norm.train[1:20,]
+h1.norm.sample.7<-0.7
+h1.norm.train.index.7<-sample(h1.norm.nrows, h1.norm.sample.7*h1.norm.nrows)
+h1.norm.train.7<-h1.norm[h1.norm.train.index.7,]
+h1.norm.train.7[1:20,]
 
-h1.norm.test<-h1.norm[-h1.norm.train.index,]
-h1.norm.test[1:20,]
+h1.norm.test.7<-h1.norm[-h1.norm.train.index.7,]
+h1.norm.test.7[1:20,]
 
 # training and test sets for 60%
-h1.norm.sample<-0.6
-h1.norm.train.index<-sample(h1.norm.nrows, h1.norm.sample*h1.norm.nrows)
-h1.norm.train<-h1.norm[h1.norm.train.index,]
-h1.norm.train[1:20,]
+h1.norm.sample.6<-0.6
+h1.norm.train.index.6<-sample(h1.norm.nrows, h1.norm.sample.6*h1.norm.nrows)
+h1.norm.train.6<-h1.norm[h1.norm.train.index.6,]
+h1.norm.train.6[1:20,]
 
-h1.norm.test<-h1.norm[-h1.norm.train.index,]
-h1.norm.test[1:20,]
+h1.norm.test.6<-h1.norm[-h1.norm.train.index.6,]
+h1.norm.test.6[1:20,]
 
 # training and test sets for 50%
-h1.norm.sample<-0.5
-h1.norm.train.index<-sample(h1.norm.nrows, h1.norm.sample*h1.norm.nrows)
-h1.norm.train<-h1.norm[h1.norm.train.index,]
-h1.norm.train[1:20,]
+h1.norm.sample.5<-0.5
+h1.norm.train.index.5<-sample(h1.norm.nrows, h1.norm.sample.5*h1.norm.nrows)
+h1.norm.train.5<-h1.norm[h1.norm.train.index.5,]
+h1.norm.train.5[1:20,]
 
-h1.norm.test<-h1.norm[-h1.norm.train.index,]
-h1.norm.test[1:20,]
+h1.norm.test.5<-h1.norm[-h1.norm.train.index.5,]
+h1.norm.test.5[1:20,]
 
 # Kmeans Clustering for k = 5 to 10
-h1.k5<-kmeans(h1.norm, centers=5, nstart=10)
-h1.k5
-factoextra::fviz_cluster(h1.k5,h1)
+h1.norm.train.5.k5<-kmeans(h1.norm.train.5, centers=5, nstart=10)
+h1.norm.train.5.k5
+factoextra::fviz_cluster(h1.norm.train.5.k5,h1.norm.train.5)
 
-h1.k6<-kmeans(h1.norm, centers=6, nstart=10)
-h1.k6
-factoextra::fviz_cluster(h1.k6,h1)
+h1.norm.train.6.k5<-kmeans(h1.norm.train.6, centers=5, nstart=10)
+h1.norm.train.6.k5
+factoextra::fviz_cluster(h1.norm.train.6.k5,h1.norm.train.6)
 
-h1.k7<-kmeans(h1.norm, centers=7, nstart=10)
-h1.k7
-factoextra::fviz_cluster(h1.k7,h1)
+h1.norm.train.7.k5<-kmeans(h1.norm.train.7, centers=5, nstart=10)
+h1.norm.train.7.k5
+factoextra::fviz_cluster(h1.norm.train.5.k7,h1.norm.train.7)
 
-h1.k8<-kmeans(h1.norm, centers=8, nstart=10)
-h1.k8
-factoextra::fviz_cluster(h1.k8,h1)
+h1.norm.train.5.k6<-kmeans(h1.norm.train.5, centers=6, nstart=10)
+h1.norm.train.5.k6
+factoextra::fviz_cluster(h1.norm.train.5.k6,h1.norm.train.5)
 
-h1.k9<-kmeans(h1.norm, centers=9, nstart=10)
-h1.k9
-factoextra::fviz_cluster(h1.k9,h1)
+h1.norm.train.6.k6<-kmeans(h1.norm.train.6, centers=6, nstart=10)
+h1.norm.train.6.k6
+factoextra::fviz_cluster(h1.norm.train.6.k6,h1.norm.train.6)
 
-h1.k10<-kmeans(h1.norm, centers=10, nstart=10)
-h1.k10
-factoextra::fviz_cluster(h1.k10,h1)
+h1.norm.train.7.k6<-kmeans(h1.norm.train.7, centers=6, nstart=10)
+h1.norm.train.7.k6
+factoextra::fviz_cluster(h1.norm.train.7.k6,h1.norm.train.7)
 
-# create training labels for kmeans
-h1.norm.train.k5<-kmeans(h1.norm.train, centers=5)
-h1.norm.train.k5
+h1.norm.train.5.k7<-kmeans(h1.norm.train.5, centers=7, nstart=10)
+h1.norm.train.5.k7
+factoextra::fviz_cluster(h1.norm.train.5.k7,h1.norm.train.5)
 
-h1.norm.train.k6<-kmeans(h1.norm.train, centers=6)
-h1.norm.train.k6
+h1.norm.train.6.k7<-kmeans(h1.norm.train.6, centers=7, nstart=10)
+h1.norm.train.6.k7
+factoextra::fviz_cluster(h1.norm.train.6.k7,h1.norm.train.6)
 
-h1.norm.train.k7<-kmeans(h1.norm.train, centers=7)
-h1.norm.train.k7
+h1.norm.train.7.k7<-kmeans(h1.norm.train.7, centers=7, nstart=10)
+h1.norm.train.7.k7
+factoextra::fviz_cluster(h1.norm.train.7.k7,h1.norm.train.7)
 
-h1.norm.train.k8<-kmeans(h1.norm.train, centers=8)
-h1.norm.train.k8
+h1.norm.train.5.k8<-kmeans(h1.norm.train.5, centers=8, nstart=10)
+h1.norm.train.5.k8
+factoextra::fviz_cluster(h1.norm.train.5.k8,h1.norm.train.5)
 
-h1.norm.train.k9<-kmeans(h1.norm.train, centers=9)
-h1.norm.train.k9
+h1.norm.train.6.k8<-kmeans(h1.norm.train.6, centers=8, nstart=10)
+h1.norm.train.6.k8
+factoextra::fviz_cluster(h1.norm.train.6.k8,h1.norm.train.6)
 
-h1.norm.train.k10<-kmeans(h1.norm.train, centers=10)
-h1.norm.train.k10
+h1.norm.train.7.k8<-kmeans(h1.norm.train.7, centers=8, nstart=10)
+h1.norm.train.7.k8
+factoextra::fviz_cluster(h1.norm.train.7.k8,h1.norm.train.7)
 
-# create test labels for kmeans
-h1.norm.test.k5<-kmeans(h1.norm.test, centers=5)
-h1.norm.test.k5
+h1.norm.train.5.k9<-kmeans(h1.norm.train.5, centers=9, nstart=10)
+h1.norm.train.5.k9
+factoextra::fviz_cluster(h1.norm.train.5.k9,h1.norm.train.5)
 
-h1.norm.test.k6<-kmeans(h1.norm.test, centers=6)
-h1.norm.test.k6
+h1.norm.train.6.k9<-kmeans(h1.norm.train.6, centers=9, nstart=10)
+h1.norm.train.6.k9
+factoextra::fviz_cluster(h1.norm.train.6.k9,h1.norm.train.6)
 
-h1.norm.test.k7<-kmeans(h1.norm.test, centers=7)
-h1.norm.test.k7
+h1.norm.train.7.k9<-kmeans(h1.norm.train.7, centers=9, nstart=10)
+h1.norm.train.7.k9
+factoextra::fviz_cluster(h1.norm.train.7.k9,h1.norm.train.7)
 
-h1.norm.test.k8<-kmeans(h1.norm.test, centers=8)
-h1.norm.test.k8
+h1.norm.train.5.k10<-kmeans(h1.norm.train.5, centers=10, nstart=10)
+h1.norm.train.5.k10
+factoextra::fviz_cluster(h1.norm.train.5.k10,h1.norm.train.5)
 
-h1.norm.test.k9<-kmeans(h1.norm.test, centers=9)
-h1.norm.test.k9
+h1.norm.train.6.k10<-kmeans(h1.norm.train.6, centers=10, nstart=10)
+h1.norm.train.6.k10
+factoextra::fviz_cluster(h1.norm.train.6.k10,h1.norm.train.6)
 
-h1.norm.test.k10<-kmeans(h1.norm.test, centers=10)
-h1.norm.test.k10
+h1.norm.train.7.k10<-kmeans(h1.norm.train.7, centers=10, nstart=10)
+h1.norm.train.7.k10
+factoextra::fviz_cluster(h1.norm.train.6.k10,h1.norm.train.7)
 
-h1.norm.test.labels<-h1.norm.test.k5$cluster
+# # create training labels for kmeans
+# h1.norm.train.k5<-kmeans(h1.norm.train, centers=5)
+# h1.norm.train.k5
+# 
+# h1.norm.train.k6<-kmeans(h1.norm.train, centers=6)
+# h1.norm.train.k6
+# 
+# h1.norm.train.k7<-kmeans(h1.norm.train, centers=7)
+# h1.norm.train.k7
+# 
+# h1.norm.train.k8<-kmeans(h1.norm.train, centers=8)
+# h1.norm.train.k8
+# 
+# h1.norm.train.k9<-kmeans(h1.norm.train, centers=9)
+# h1.norm.train.k9
+# 
+# h1.norm.train.k10<-kmeans(h1.norm.train, centers=10)
+# h1.norm.train.k10
+
+# create test labels via kmeans
+h1.norm.test.label5.k5<-kmeans(h1.norm.test.5, centers=5)
+h1.norm.test.label5.k5$cluster
+
+h1.norm.test.label6.k5<-kmeans(h1.norm.test.6, centers=5)
+h1.norm.test.label6.k5$cluster
+
+h1.norm.test.label7.k5<-kmeans(h1.norm.test.7, centers=5)
+h1.norm.test.label7.k5$cluster
+
+h1.norm.test.label5.k6<-kmeans(h1.norm.test.5, centers=6)
+h1.norm.test.label5.k6$cluster
+
+h1.norm.test.label6.k6<-kmeans(h1.norm.test.6, centers=6)
+h1.norm.test.label6.k6$cluster
+
+h1.norm.test.label7.k6<-kmeans(h1.norm.test.7, centers=6)
+h1.norm.test.label7.k6$cluster
+
+h1.norm.test.label5.k7<-kmeans(h1.norm.test.5, centers=7)
+h1.norm.test.label5.k7$cluster
+
+h1.norm.test.label6.k7<-kmeans(h1.norm.test.6, centers=7)
+h1.norm.test.label6.k7$cluster
+
+h1.norm.test.label7.k7<-kmeans(h1.norm.test.7, centers=7)
+h1.norm.test.label7.k7$cluster
+
+h1.norm.test.label5.k8<-kmeans(h1.norm.test.5, centers=8)
+h1.norm.test.label5.k8$cluster
+
+h1.norm.test.label6.k8<-kmeans(h1.norm.test.6, centers=8)
+h1.norm.test.label6.k8$cluster
+
+h1.norm.test.label7.k8<-kmeans(h1.norm.test.7, centers=8)
+h1.norm.test.label7.k8$cluster
+
+h1.norm.test.label5.k9<-kmeans(h1.norm.test.5, centers=9)
+h1.norm.test.label5.k9$cluster
+
+h1.norm.test.label6.k9<-kmeans(h1.norm.test.6, centers=9)
+h1.norm.test.label6.k9$cluster
+
+h1.norm.test.label7.k9<-kmeans(h1.norm.test.7, centers=9)
+h1.norm.test.label7.k9$cluster
+
+h1.norm.test.label5.k10<-kmeans(h1.norm.test.5, centers=10)
+h1.norm.test.label5.k10$cluster
+
+h1.norm.test.label6.k10<-kmeans(h1.norm.test.6, centers=10)
+h1.norm.test.label6.k10$cluster
+
+h1.norm.test.label7.k10<-kmeans(h1.norm.test.7, centers=10)
+h1.norm.test.label6.k10$cluster
+
+# h1.norm.test.labels<-h1.norm.test.k5$cluster
 
 # knn clustering for k = 5 to 10
-h1.norm.test.knn5 <- class::knn(h1.norm.train, h1.norm.test, h1.norm.train.k5$cluster,k=5)
-h1.norm.test.knn5
+h1.5.knn5 <- class::knn(h1.norm.train.5, h1.norm.test.5, h1.norm.train.5.k5$cluster,k=5)
+h1.5.knn5
 
-h1.norm.test.knn6 <- class::knn(h1.norm.train, h1.norm.test, h1.norm.train.65$cluster,k=6)
-h1.norm.test.knn6
+h1.6.knn5 <- class::knn(h1.norm.train.6, h1.norm.test.6, h1.norm.train.6.k5$cluster,k=5)
+h1.6.knn5
 
-h1.norm.test.knn7 <- class::knn(h1.norm.train, h1.norm.test, h1.norm.train.k7$cluster,k=7)
-h1.norm.test.knn7
+h1.7.knn5 <- class::knn(h1.norm.train.7, h1.norm.test.7, h1.norm.train.7.k5$cluster,k=5)
+h1.7.knn5
 
-h1.norm.test.knn8 <- class::knn(h1.norm.train, h1.norm.test, h1.norm.train.k8$cluster,k=8)
-h1.norm.test.knn8
+h1.5.knn6 <- class::knn(h1.norm.train.5, h1.norm.test.5, h1.norm.train.5.k6$cluster,k=6)
+h1.5.knn6
 
-h1.norm.test.knn9 <- class::knn(h1.norm.train, h1.norm.test, h1.norm.train.k9$cluster,k=9)
-h1.norm.test.knn9
+h1.6.knn6 <- class::knn(h1.norm.train.6, h1.norm.test.6, h1.norm.train.6.k6$cluster,k=6)
+h1.6.knn6
 
-h1.norm.test.knn10 <- class::knn(h1.norm.train, h1.norm.test, h1.norm.train.k10$cluster,k=10)
-h1.norm.test.knn10
+h1.7.knn6 <- class::knn(h1.norm.train.7, h1.norm.test.7, h1.norm.train.7.k6$cluster,k=6)
+h1.7.knn6
 
+h1.5.knn7 <- class::knn(h1.norm.train.5, h1.norm.test.5, h1.norm.train.5.k7$cluster,k=7)
+h1.5.knn7
+
+h1.6.knn7 <- class::knn(h1.norm.train.6, h1.norm.test.6, h1.norm.train.6.k7$cluster,k=7)
+h1.6.knn7
+
+h1.7.knn7 <- class::knn(h1.norm.train.7, h1.norm.test.7, h1.norm.train.7.k7$cluster,k=7)
+h1.7.knn7
+
+h1.5.knn8 <- class::knn(h1.norm.train.5, h1.norm.test.5, h1.norm.train.5.k8$cluster,k=8)
+h1.5.knn8
+
+h1.6.knn8 <- class::knn(h1.norm.train.6, h1.norm.test.6, h1.norm.train.6.k8$cluster,k=8)
+h1.6.knn8
+
+h1.7.knn8 <- class::knn(h1.norm.train.7, h1.norm.test.7, h1.norm.train.7.k8$cluster,k=8)
+h1.7.knn8
+
+h1.5.knn9 <- class::knn(h1.norm.train.5, h1.norm.test.5, h1.norm.train.5.k9$cluster,k=9)
+h1.5.knn9
+
+h1.6.knn9 <- class::knn(h1.norm.train.6, h1.norm.test.6, h1.norm.train.6.k9$cluster,k=9)
+h1.6.knn9
+
+h1.7.knn9 <- class::knn(h1.norm.train.7, h1.norm.test.7, h1.norm.train.7.k9$cluster,k=9)
+h1.7.knn9
+
+h1.5.knn10 <- class::knn(h1.norm.train.5, h1.norm.test.5, h1.norm.train.5.k10$cluster,k=10)
+h1.5.knn10
+
+h1.6.knn10 <- class::knn(h1.norm.train.6, h1.norm.test.6, h1.norm.train.6.k10$cluster,k=10)
+h1.6.knn10
+
+h1.7.knn10 <- class::knn(h1.norm.train.7, h1.norm.test.7, h1.norm.train.7.k10$cluster,k=10)
+h1.7.knn10
 
 # iclust
-h1.clust.k5 <- iclust(h1, nclusters = 5)
-h1.clust.k5
-h1.clust.k6 <- iclust(h1, nclusters = 6)
-h1.clust.k6
-h1.clust.k7 <- iclust(h1, nclusters = 7)
-h1.clust.k7
-h1.clust.k8 <- iclust(h1, nclusters = 8)
-h1.clust.k8
-h1.clust.k9 <- iclust(h1, nclusters = 9)
-h1.clust.k9
-h1.clust.k10 <- iclust(h1, nclusters = 10)
-h1.clust.k10
+h1.clust.5.k5 <- iclust(h1.norm.train.5, nclusters = 5)
+h1.clust.5.k5
+h1.clust.6.k5 <- iclust(h1.norm.train.6, nclusters = 5)
+h1.clust.6.k5
+h1.clust.7.k5 <- iclust(h1.norm.train.7, nclusters = 5)
+h1.clust.7.k5
+
+h1.clust.5.k6 <- iclust(h1.norm.train.5, nclusters = 6)
+h1.clust.5.k6
+h1.clust.6.k6 <- iclust(h1.norm.train.6, nclusters = 6)
+h1.clust.6.k6
+h1.clust.7.k6 <- iclust(h1.norm.train.7, nclusters = 6)
+h1.clust.7.k6
+
+h1.clust.5.k7 <- iclust(h1.norm.train.5, nclusters = 7)
+h1.clust.5.k7
+h1.clust.6.k7 <- iclust(h1.norm.train.6, nclusters = 7)
+h1.clust.6.k7
+h1.clust.7.k7 <- iclust(h1.norm.train.7, nclusters = 7)
+h1.clust.7.k7
+
+h1.clust.5.k8 <- iclust(h1.norm.train.5, nclusters = 8)
+h1.clust.5.k8
+h1.clust.6.k8 <- iclust(h1.norm.train.6, nclusters = 8)
+h1.clust.6.k8
+h1.clust.7.k8 <- iclust(h1.norm.train.7, nclusters = 8)
+h1.clust.7.k8
+
+h1.clust.5.k9 <- iclust(h1.norm.train.5, nclusters = 9)
+h1.clust.5.k9
+h1.clust.6.k9 <- iclust(h1.norm.train.6, nclusters = 9)
+h1.clust.6.k9
+h1.clust.7.k9 <- iclust(h1.norm.train.7, nclusters = 9)
+h1.clust.7.k9
+
+h1.clust.5.k10 <- iclust(h1.norm.train.5, nclusters = 10)
+h1.clust.5.k10
+h1.clust.6.k10 <- iclust(h1.norm.train.6, nclusters = 10)
+h1.clust.6.k10
+h1.clust.7.k10 <- iclust(h1.norm.train.7, nclusters = 10)
+h1.clust.7.k10
+
+# cross tables
+ct.5.k5<-CrossTable(x=h1.norm.test.label5.k5$cluster, y=h1.5.knn5, prop.chisq=FALSE)
+ct.6.k5<-CrossTable(x=h1.norm.test.label6.k5$cluster, y=h1.6.knn5, prop.chisq=FALSE)
+ct.7.k5<-CrossTable(x=h1.norm.test.label7.k5$cluster, y=h1.7.knn5, prop.chisq=FALSE)
+
+ct.5.k7<-CrossTable(x=h1.norm.test.label5.k7$cluster, y=h1.5.knn7, prop.chisq=FALSE)
+ct.6.k7<-CrossTable(x=h1.norm.test.label6.k7$cluster, y=h1.6.knn7, prop.chisq=FALSE)
+ct.7.k7<-CrossTable(x=h1.norm.test.label7.k7$cluster, y=h1.7.knn7, prop.chisq=FALSE)
+
+ct.5.k9<-CrossTable(x=h1.norm.test.label5.k9$cluster, y=h1.5.knn9, prop.chisq=FALSE)
+ct.6.k9<-CrossTable(x=h1.norm.test.label6.k9$cluster, y=h1.6.knn9, prop.chisq=FALSE)
+ct.7.k9<-CrossTable(x=h1.norm.test.label7.k9$cluster, y=h1.7.knn9, prop.chisq=FALSE)
+
 
 # predictions???
 h1.norm.test.lm<-lm(formula=h1.norm.test$Area~h1.norm.test$Perimeter+h1.norm.test$MajorAxisLength+h1.norm.test$MinorAxisLength+h1.norm.test$ConvexArea+h1.norm.test$EquivDiameter+h1.norm.test$ShapeFactor1+h1.norm.test$ShapeFactor2, data=h1.norm.test)

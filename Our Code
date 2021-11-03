@@ -14,11 +14,10 @@ library("psych")
 library("igraph")
 library("stats")
 library("gmodels")
+
 my_data <- read_excel("Dry_Bean_Dataset.xlsx")
 plot(my_data)
-h <- my_data[,1:8]
-plot(h)
-# rglplot(bean_graph)
+
 summary(my_data)
 describe(my_data)
 
@@ -298,7 +297,6 @@ ct.5.k9<-CrossTable(x=h1.norm.test.label5.k9$cluster, y=h1.5.knn9, prop.chisq=FA
 ct.6.k9<-CrossTable(x=h1.norm.test.label6.k9$cluster, y=h1.6.knn9, prop.chisq=FALSE)
 ct.7.k9<-CrossTable(x=h1.norm.test.label7.k9$cluster, y=h1.7.knn9, prop.chisq=FALSE)
 
-
 # predictions
 h1.norm.test.5.lm<-lm(formula=h1.norm.test.5$Area~h1.norm.test.5$Perimeter+h1.norm.test.5$MajorAxisLength+h1.norm.test.5$MinorAxisLength+h1.norm.test.5$ConvexArea+h1.norm.test.5$EquivDiameter+h1.norm.test.5$ShapeFactor1+h1.norm.test.5$ShapeFactor2, data=h1.norm.test.5)
 h1.norm.pred.5<-predict(h1.norm.test.5.lm, newData=h1.norm.test.5)
@@ -323,3 +321,6 @@ h1.norm.test.7.glm<-glm(formula=h1.norm.test.7$Area~h1.norm.test.7$Perimeter+h1.
 plot(h1.norm.test.7.glm)
 
 h1.glm<-glm(formula=h1.norm.test.5$Area~h1.norm.test.5$Perimeter, family=gaussian, data=h1.norm.test.5)
+h1.glm.1<-glm(formula=h1.norm.test.6$Area~h1.norm.test.6$Perimeter, family=gaussian, data=h1.norm.test.6)
+
+

@@ -70,7 +70,7 @@ factoextra::fviz_cluster(h1.norm.train.6.k5,h1.norm.train.6)
 
 h1.norm.train.7.k5<-kmeans(h1.norm.train.7, centers=5, nstart=10)
 h1.norm.train.7.k5
-factoextra::fviz_cluster(h1.norm.train.5.k7,h1.norm.train.7)
+factoextra::fviz_cluster(h1.norm.train.7.k7,h1.norm.train.7)
 
 h1.norm.train.5.k6<-kmeans(h1.norm.train.5, centers=6, nstart=10)
 h1.norm.train.5.k6
@@ -130,26 +130,7 @@ factoextra::fviz_cluster(h1.norm.train.6.k10,h1.norm.train.6)
 
 h1.norm.train.7.k10<-kmeans(h1.norm.train.7, centers=10, nstart=10)
 h1.norm.train.7.k10
-factoextra::fviz_cluster(h1.norm.train.6.k10,h1.norm.train.7)
-
-# # create training labels for kmeans
-# h1.norm.train.k5<-kmeans(h1.norm.train, centers=5)
-# h1.norm.train.k5
-# 
-# h1.norm.train.k6<-kmeans(h1.norm.train, centers=6)
-# h1.norm.train.k6
-# 
-# h1.norm.train.k7<-kmeans(h1.norm.train, centers=7)
-# h1.norm.train.k7
-# 
-# h1.norm.train.k8<-kmeans(h1.norm.train, centers=8)
-# h1.norm.train.k8
-# 
-# h1.norm.train.k9<-kmeans(h1.norm.train, centers=9)
-# h1.norm.train.k9
-# 
-# h1.norm.train.k10<-kmeans(h1.norm.train, centers=10)
-# h1.norm.train.k10
+factoextra::fviz_cluster(h1.norm.train.7.k10,h1.norm.train.7)
 
 # create test labels via kmeans
 h1.norm.test.label5.k5<-kmeans(h1.norm.test.5, centers=5)
@@ -204,9 +185,7 @@ h1.norm.test.label6.k10<-kmeans(h1.norm.test.6, centers=10)
 h1.norm.test.label6.k10$cluster
 
 h1.norm.test.label7.k10<-kmeans(h1.norm.test.7, centers=10)
-h1.norm.test.label6.k10$cluster
-
-# h1.norm.test.labels<-h1.norm.test.k5$cluster
+h1.norm.test.label7.k10$cluster
 
 # knn clustering for k = 5 to 10
 h1.5.knn5 <- class::knn(h1.norm.train.5, h1.norm.test.5, h1.norm.train.5.k5$cluster,k=5)
@@ -320,12 +299,27 @@ ct.6.k9<-CrossTable(x=h1.norm.test.label6.k9$cluster, y=h1.6.knn9, prop.chisq=FA
 ct.7.k9<-CrossTable(x=h1.norm.test.label7.k9$cluster, y=h1.7.knn9, prop.chisq=FALSE)
 
 
-# predictions???
-h1.norm.test.lm<-lm(formula=h1.norm.test$Area~h1.norm.test$Perimeter+h1.norm.test$MajorAxisLength+h1.norm.test$MinorAxisLength+h1.norm.test$ConvexArea+h1.norm.test$EquivDiameter+h1.norm.test$ShapeFactor1+h1.norm.test$ShapeFactor2, data=h1.norm.test)
-h1.norm.pred<-predict(h1.norm.test.lm, newData=h1.norm.test)
+# predictions
+h1.norm.test.5.lm<-lm(formula=h1.norm.test.5$Area~h1.norm.test.5$Perimeter+h1.norm.test.5$MajorAxisLength+h1.norm.test.5$MinorAxisLength+h1.norm.test.5$ConvexArea+h1.norm.test.5$EquivDiameter+h1.norm.test.5$ShapeFactor1+h1.norm.test.5$ShapeFactor2, data=h1.norm.test.5)
+h1.norm.pred.5<-predict(h1.norm.test.5.lm, newData=h1.norm.test.5)
+summary(h1.norm.pred.5)
 
-h1.norm.test.glm<-glm(formula=h1.norm.test$Area~h1.norm.test$Perimeter+h1.norm.test$MajorAxisLength+h1.norm.test$MinorAxisLength+h1.norm.test$ConvexArea+h1.norm.test$EquivDiameter+h1.norm.test$ShapeFactor1+h1.norm.test$ShapeFactor2, data=h1.norm.test)
-h1.norm.test.glm
+h1.norm.test.6.lm<-lm(formula=h1.norm.test.6$Area~h1.norm.test.6$Perimeter+h1.norm.test.6$MajorAxisLength+h1.norm.test.6$MinorAxisLength+h1.norm.test.6$ConvexArea+h1.norm.test.6$EquivDiameter+h1.norm.test.6$ShapeFactor1+h1.norm.test.6$ShapeFactor2, data=h1.norm.test.6)
+h1.norm.pred.6<-predict(h1.norm.test.6.lm, newData=h1.norm.test.6)
+summary(h1.norm.pred.6)
 
-h1.norm.ct<-CrossTable(h1.norm.test.labels, h1.norm.pred, prop.chisq = FALSE)
+h1.norm.test.7.lm<-lm(formula=h1.norm.test.7$Area~h1.norm.test.7$Perimeter+h1.norm.test.7$MajorAxisLength+h1.norm.test.7$MinorAxisLength+h1.norm.test.7$ConvexArea+h1.norm.test.7$EquivDiameter+h1.norm.test.7$ShapeFactor1+h1.norm.test.7$ShapeFactor2, data=h1.norm.test.7)
+h1.norm.pred.7<-predict(h1.norm.test.7.lm, newData=h1.norm.test.7)
+summary(h1.norm.pred.7)
 
+# glm functions
+h1.norm.test.5.glm<-glm(formula=h1.norm.test.5$Area~h1.norm.test.5$Perimeter+h1.norm.test.5$MajorAxisLength+h1.norm.test.5$MinorAxisLength+h1.norm.test.5$ConvexArea+h1.norm.test.5$EquivDiameter+h1.norm.test.5$ShapeFactor1+h1.norm.test.5$ShapeFactor2, data=h1.norm.test.5)
+plot(h1.norm.test.5.glm)
+
+h1.norm.test.6.glm<-glm(formula=h1.norm.test.6$Area~h1.norm.test.6$Perimeter+h1.norm.test.6$MajorAxisLength+h1.norm.test.6$MinorAxisLength+h1.norm.test.6$ConvexArea+h1.norm.test.6$EquivDiameter+h1.norm.test.6$ShapeFactor1+h1.norm.test.6$ShapeFactor2, data=h1.norm.test.6)
+plot(h1.norm.test.6.glm)
+
+h1.norm.test.7.glm<-glm(formula=h1.norm.test.7$Area~h1.norm.test.7$Perimeter+h1.norm.test.7$MajorAxisLength+h1.norm.test.7$MinorAxisLength+h1.norm.test.7$ConvexArea+h1.norm.test.7$EquivDiameter+h1.norm.test.7$ShapeFactor1+h1.norm.test.7$ShapeFactor2, data=h1.norm.test.7)
+plot(h1.norm.test.7.glm)
+
+h1.glm<-glm(formula=h1.norm.test.5$Area~h1.norm.test.5$Perimeter, family=gaussian, data=h1.norm.test.5)
